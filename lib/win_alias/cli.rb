@@ -26,7 +26,6 @@ module WinAlias
   end
 
   opts = parser.parse
-
   add_to_path
 
   if opts[:delete]
@@ -40,11 +39,12 @@ module WinAlias
   elsif opts.alias.nil? || opts.alias == '-h' || opts.alias == '--help'
     puts parser.help
   else
-    opts.command = opts.arguments.map do |arg|
-      arg.include?(' ') ? "\"#{arg.gsub('"', '\\"')}\"" : arg
-    end.join(' ')
-
-    if Alias.new(opts.alias, opts.command, echo_off: opts.echo).save
+    if opts.cmd && opts.cmd.empty?
+      opts.cmd = opts.arguments.map do |arg|
+        arg.include?(' ') ? "\"#{arg.gsub('"', '\\"')}\"" : arg
+      end.join(' ')
+    end
+    if Alias.new(opts.alias, opts.cmd, echo_off: opts.echo).save
       puts BBLib::Console.colorize("Created alias for #{opts.alias}", :light_green)
     end
   end
