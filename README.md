@@ -8,13 +8,17 @@ WinAlias provides a simple CLI tool to add aliases to your windows environment j
 
 ## Usage
 
-Currently the code to have WinAlias add it's bin path to the system PATH is disabled due to character limits in older Windows systems. In order to use WinAlias, be sure to add the following path to your system or user path:
+In order to use WinAlias, be sure to add the following path to your system or user path:
 
-- C:\Users\< User Name >\win-alias\bin
+- `C:\Users\<UserName>\win-alias\bin`
 
 Once the path is in your system you can add aliases and use them anywhere in cmd or any other Windows shell.
 
+IMPORTANT NOTE: If you do not add the bin directory to your PATH youself, win-alias will attempt to add it the first time it runs. This may cause issues with PATHS over 1024 characters on older Windows versions. Be sure to check your PATH if you rely on the automatic adding of the bin path. Just in case, your original PATH variable will be backed up into `C:\Users\<UserName>\win-alias\path_backup.txt`
+
 ### Add alias
+
+You can add aliases using any of the examples shown below. If your command includes flags, use the `-c` or `--cmd` argument followed by your command in quotes to avoid collisions with the flags win-alias expects.
 
 ```
 # Alias dir to ls
@@ -23,8 +27,12 @@ win-alias ls dir
 # Now run ls
 ls
 
-# Alias ll to "ls -lh"
-win-alias ll --cmd "ls -lh"
+# Alias ll to "ls -l"
+# Notice how --cmd is used to avoid win-alias treating -l as a flag to itself
+win-alias ll --cmd "ls -l"
+
+# Now run ll
+ll
 ```
 
 ### Edit alias
