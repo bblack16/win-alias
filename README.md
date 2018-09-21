@@ -14,7 +14,7 @@ Currently the code to have WinAlias add it's bin path to the system PATH is disa
 
 Once the path is in your system you can add aliases and use them anywhere in cmd or any other Windows shell.
 
-### Add aliases
+### Add alias
 
 ```
 # Alias dir to ls
@@ -25,6 +25,21 @@ ls
 
 # Alias ll to "ls -lh"
 win-alias ll --cmd "ls -lh"
+```
+
+### Edit alias
+
+You can also have win-alias open the generated script up into your systems text editor after it is created. This allows you to more easily generate much larger aliased scripts without having to rely entirely on passing the script in via the command line. To do this just add the __-e__ flag to the win-alias command.
+
+Additionally it is possible to edit existing aliases easily via the CLI. To do this, use the following command: `win-alias <alias-name> -e`
+NOTE: If you pass additional arguments the alias will be overwritten before being edited, so if you wish to edit only, please use -e only.
+
+```
+# Create an alias called ll and open it in a text editor after it is created
+win-alias ll "ls -lh" -e
+
+# Open an existing alias called ll for editing.
+# win-alias ll -e
 ```
 
 ### Delete alias
