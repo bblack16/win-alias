@@ -8,13 +8,17 @@ WinAlias provides a simple CLI tool to add aliases to your windows environment j
 
 ## Usage
 
-Currently the code to have WinAlias add it's bin path to the system PATH is disabled due to character limits in older Windows systems. In order to use WinAlias, be sure to add the following path to your system or user path:
+In order to use WinAlias, be sure to add the following path to your system or user path:
 
-- C:\Users\< User Name >\win-alias\bin
+- `C:\Users\<UserName>\win-alias\bin`
 
 Once the path is in your system you can add aliases and use them anywhere in cmd or any other Windows shell.
 
-### Add aliases
+IMPORTANT NOTE: If you do not add the bin directory to your PATH youself, win-alias will attempt to add it the first time it runs. This may cause issues with PATHS over 1024 characters on older Windows versions. Be sure to check your PATH if you rely on the automatic adding of the bin path. Just in case, your original PATH variable will be backed up into `C:\Users\<UserName>\win-alias\path_backup.txt`
+
+### Add alias
+
+You can add aliases using any of the examples shown below. If your command includes flags, use the `-c` or `--cmd` argument followed by your command in quotes to avoid collisions with the flags win-alias expects.
 
 ```
 # Alias dir to ls
@@ -23,8 +27,27 @@ win-alias ls dir
 # Now run ls
 ls
 
-# Alias ll to "ls -lh"
-win-alias ll --cmd "ls -lh"
+# Alias ll to "ls -l"
+# Notice how --cmd is used to avoid win-alias treating -l as a flag to itself
+win-alias ll --cmd "ls -l"
+
+# Now run ll
+ll
+```
+
+### Edit alias
+
+You can also have win-alias open the generated script up into your systems text editor after it is created. This allows you to more easily generate much larger aliased scripts without having to rely entirely on passing the script in via the command line. To do this just add the __-e__ flag to the win-alias command.
+
+Additionally it is possible to edit existing aliases easily via the CLI. To do this, use the following command: `win-alias <alias-name> -e`
+NOTE: If you pass additional arguments the alias will be overwritten before being edited, so if you wish to edit only, please use -e only.
+
+```
+# Create an alias called ll and open it in a text editor after it is created
+win-alias ll "ls -lh" -e
+
+# Open an existing alias called ll for editing.
+# win-alias ll -e
 ```
 
 ### Delete alias
