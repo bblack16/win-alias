@@ -5,6 +5,10 @@ module WinAlias
     end
   end
 
+  def self.success(message)
+    info(BBLib::Console.colorize(message, :light_green))
+  end
+
   def self.path
     ENV['WIN_ALIAS_HOME'] || File.join(Dir.home, 'win_alias', 'bin')
   end
