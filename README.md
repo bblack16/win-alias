@@ -1,6 +1,6 @@
 # WinAlias
 
-WinAlias provides a simple CLI tool to add aliases to your windows environment just like Unix using your PATH environment and batch scripts. This is in very early development and is not intended to do anything more advanced than what is advertised. It is purely for convenience..
+WinAlias provides a simple CLI tool to add aliases to your windows environment just like Unix using your PATH environment and batch scripts. This is in very early development and is not intended to do anything more advanced than what is advertised. It is purely for convenience.
 
 ## Installation
 
